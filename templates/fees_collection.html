@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Search For Students</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left:25px;padding-right:25px">
+            <a class="navbar-brand" href="adminpanel">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="student_registeration">Registeration</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="search_students">Search</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" href="fees_collection">Fees Collection</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        <div style="padding:20px;">
+        
+        <div style="margin-top: 0px;">
+            {%if admno%}
+                <h1></h1>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Admno</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Class</th>
+                    <th scope="col">Section</th>
+                    <th scope="col">Roll</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Religion</th>
+                    <th scope="col">Caste</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <!-- <th scope="col">Father Name</th>
+                    <th scope="col">Father Phone</th>
+                    <th scope="col">Mother Name</th>
+                    <th scope="col">Mother Phone</th> -->
+                    <!-- <th scope="col">Father Occupation</th>
+                    <th scope="col">Mother Occupation</th>
+                    <th scope="col">Guardian Name</th>
+                    <th scope="col">Guardian Phone</th>
+                    <th scope="col">Guardian Email</th>
+                    <th scope="col">Guardian Relation</th>
+                    <th scope="col">Guardian Occupation</th>
+                    <th scope="col">Guardian Addresses</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                    {%for student in students%}
+                    <tr>
+                        <th scope="row">{{student.admno}}</th>
+                        <td>{{student.fname}}</td>
+                        <td>{{student.lname}}</td>
+                        <td>{{student.class_student}}</td>
+                        <td>{{student.section}}</td>
+                        <td>{{student.roll}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.category}}</td>
+                        <td>{{student.religion}}</td>
+                        <td>{{student.caste}}</td>
+                        <td>{{student.phno}}</td>
+                        <td>{{student.email}}</td>
+                        <!-- <td>{{student.fathername}}</td>
+                        <td>{{student.fatherphone}}</td>
+                        <td>{{student.mothername}}</td>
+                        <td>{{student.motherphone}}</td> -->
+                        <!-- <td>{{student.caste}}</td> -->
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+
+            <form method="post" action="invoice">{% csrf_token%}
+                <label for="feestype" class="form-label">Choose Fee Type</label>
+                <select name="feestype" id="feestype" class="form-control">
+                    {% if class_fees_results%}
+                    {%for class_fees_result in class_fees_results%}
+                    <option value={{class_fees_result.fees_value}}>{{class_fees_result.feestype}} - INR {{class_fees_result.fees_value}}</option>
+                    {%endfor%}
+                    {%else%}
+                    <option value="0">No Fees</option>
+                    {%endif%}
+                    
+                <button type="submit" class="btn btn-primary">Collect</button>
+            </form>
+           
+            <form method="post" action="invoice">{% csrf_token%}
+                <input type="hidden" name="admno" id="admno" value="{{admno}}"></input>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Print</button>
+            </form>
+                    
+                    
+                    
+                    
+                    <!-- {{student.section}} -->
+                    <br/>
+                
+            {%else%}
+                <h1>No Search</h1>
+            {%endif%}
+        </div>
+    
+    </div>
+    
+    </body>
+</html>

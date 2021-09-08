@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Admin Panel</title>
+  </head>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left:25px;padding-right:25px">
+        <a class="navbar-brand" href="adminpanel">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="student_registeration">Registeration</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="search_students">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="fees_collection">Fees Collection</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+    <div style="padding: 20px;">
+        <div class="card" style="margin-bottom: 20px;">
+            <h5 class="card-header">Fees Types</h5>
+            <div class="card-body">
+              <!-- <h5 class="card-title">Register Students here</h5> -->
+              <p class="card-text">Click here to see all the fees types.</p>
+                <form method="post" action="adminpanel">{% csrf_token%}
+                    <div class="row">        
+                        <div class="col-md-4">
+                                <div class="mb-3">
+                                <label for="feestype" class="form-label">Enter Fees Type </label>
+                                <input type="text" class="form-control" id="feestype" name="feestype" required></input>
+                                </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                            <label for="class_fees" class="form-label">Enter Class </label>
+                            <select name="class_fees" id="class_fees" class="form-control" required>
+                                <option value="Primary">Primary</option>
+                                <option value="KG">KG</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                            <label for="fees_value" class="form-label">Enter Fees Amount </label>
+                            <input type="text" class="form-control" id="fees_value" name="fees_value" required></input>
+                            </div>
+                    </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">Existing Fees Types</h5>
+            <div class="card-body">
+                <!-- <p class="card-text">Choose a class.</p> -->
+                <form method="post" action="adminpanel">{% csrf_token%}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                            <label for="class_fees_search" class="form-label">Enter Class </label>
+                            <select name="class_fees_search" id="class_fees_search" class="form-control">
+                                <option value="Primary">Primary</option>
+                                <option value="KG">KG</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+
+            
+        </div>
+        {% if class_fees_results%}
+        <div style="margin-top: 20px;">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Search Results
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {%for class_fees_result in class_fees_results%} 
+                <a class="dropdown-item" href="#">{{class_fees_result.feestype}}-{{class_fees_result.fees_value}}</a>
+                {%endfor%}
+              
+            </div>
+
+          </div>
+          {%else%}
+            <h1>No Search Results </h1>
+          {%endif%}  
+      </div>
+
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

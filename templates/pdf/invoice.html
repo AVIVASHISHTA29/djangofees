@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    
+        <!-- Bootstrap CSS -->
+      
+        <title>Fees Student {{ student.admno}}</title>
+        <style type="text/css">
+            body {
+                font-weight: 200;
+                font-size: 14px;
+            }
+            .header {
+                font-size: 20px;
+                font-weight: 100;
+                text-align: center;
+                color: #007cae;
+            }
+            .title {
+                font-size: 22px;
+                font-weight: 100;
+               /* text-align: right;*/
+               padding: 10px 20px 0px 20px;  
+            }
+            .title span {
+                color: #007cae;
+            }
+            .details {
+                padding: 10px 20px 0px 20px;
+                text-align: left !important;
+                /*margin-left: 40%;*/
+            }
+            .hrItem {
+                border: none;
+                height: 1px;
+                /* Set the hr color */
+                color: #333; /* old IE */
+                background-color: #fff; /* Modern Browsers */
+            }
+
+            table, th ,td{
+                border:1px solid black;
+                word-wrap:break-word;
+                text-align:center !important;
+                }
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <div class='header'>
+               
+                <p class='title'>Fees Slip Student {{student.admno}}</p>
+                
+            </div>
+        <div>
+        <div class='details'>
+            <div style="margin-top: 0px;">
+                {%if student%}
+                    
+                <table style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Admno</th>
+                        <th>First Name</th>
+                        <!-- <th>Last Name</th> -->
+                        <th>Class</th>
+                        <th>Section</th>
+                        <th>Roll</th>
+                        <th>Gender</th>
+                        <!-- <th>Category</th>
+                        <th>Religion</th>
+                        <th>Caste</th> -->
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <!-- <th scope="col">Father Name</th>
+                        <th scope="col">Father Phone</th>
+                        <th scope="col">Mother Name</th>
+                        <th scope="col">Mother Phone</th> -->
+                        <!-- <th scope="col">Father Occupation</th>
+                        <th scope="col">Mother Occupation</th>
+                        <th scope="col">Guardian Name</th>
+                        <th scope="col">Guardian Phone</th>
+                        <th scope="col">Guardian Email</th>
+                        <th scope="col">Guardian Relation</th>
+                        <th scope="col">Guardian Occupation</th>
+                        <th scope="col">Guardian Addresses</th> -->
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>{{student.admno}}</th>
+                            <td>{{student.fname}}</td>
+                            <!-- <td>{{student.lname}}</td> -->
+                            <td>{{student.class_student}}</td>
+                            <td>{{student.section}}</td>
+                            <td>{{student.roll}}</td>
+                            <td>{{student.gender}}</td>
+                            <!-- <td>{{student.category}}</td>
+                            <td>{{student.religion}}</td>
+                            <td>{{student.caste}}</td> -->
+                            <td>{{student.phno}}</td>
+                            <td>{{student.email}}</td>
+                            <!-- <td>{{student.fathername}}</td>
+                            <td>{{student.fatherphone}}</td>
+                            <td>{{student.mothername}}</td>
+                            <td>{{student.motherphone}}</td> -->
+                            <!-- <td>{{student.caste}}</td> -->
+                        </tr>
+                    </tbody>
+                </table>       
+
+                        <!-- {{student.section}} -->
+                        <br/>
+                    
+                {%else%}
+                    <h1>No Search</h1>
+                {%endif%}
+            </div>
+            <hr class='hrItem' />
+        </div>
+    </div>
+    </body>
+</html>
